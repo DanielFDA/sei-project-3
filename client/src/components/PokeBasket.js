@@ -99,13 +99,9 @@ function PokeBasket() {
 
   const updateBasket = async e => {
     const itemIdToUpdate = e.target.dataset.item
-    const itemId = e.target.name
-   
     const body = {
-      quantity: itemQty,
-      item: itemId
+      quantity: itemQty
     }
-
     try {
       const response = await axios.put(`/api/userprofile/basket/update/${itemIdToUpdate}`, body, headers())
       const { data } = await axios.get('/api/userprofile', headers())
