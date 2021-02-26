@@ -131,32 +131,32 @@ Most of my time coding on this project was focused on the logic for the pokePaym
 This is how the JSX for the index page looked :
 
 ```js
-{items ?
-        <>
-          {filteredItems.map(item => (
-            <PokeCard key={item._id} {...item} />
-          ))}
-          <div className="pagination_wrapper">
-            <div className="inner_wrapper">
-              {
-                Number(page) !== 1 &&
-                <button onClick={prevPage}>
-                  <img className="left" src={leftArrow} alt="left arrow" />
-                Prev
-                </button>
-              }
-              { 
-                mapPageLinks(Math.ceil(filterItems(items).length / 12))
-              }
-              {
-                Number(page) !== Math.ceil(filterItems(items).length / 12) &&
-                <button onClick={nextPage}>   
-                  Next
-                  <img className="right" src={rightArrow} alt="right arrow" />
-                </button>
-              }
-            </div>
-          </div> 
+<>
+  {filteredItems.map(item => (
+    <PokeCard key={item._id} {...item} />
+  ))}
+  <div className="pagination_wrapper">
+    <div className="inner_wrapper">
+      {
+        Number(page) !== 1 &&
+        <button onClick={prevPage}>
+          <img className="left" src={leftArrow} alt="left arrow" />
+        Prev
+        </button>
+      }
+      { 
+        mapPageLinks(Math.ceil(filterItems(items).length / 12))
+      }
+      {
+        Number(page) !== Math.ceil(filterItems(items).length / 12) &&
+        <button onClick={nextPage}>   
+          Next
+          <img className="right" src={rightArrow} alt="right arrow" />
+        </button>
+      }
+    </div>
+  </div> 
+</>
 ```
 
 And after all the styling and everything being set up correctly, it would look like this, the pagination was made by Masa
@@ -170,53 +170,52 @@ This page would display the items with their name, price and star rating based o
 For the show page some of the jsx looked like this:
 
 ```js
-<div className="page_wrapper_column">
-        { item ?
-          <>
-            <div className="product_wrapper">
-              <img className= "product_image" src={item.image} alt={item.name} />
-              <div className="product_info">
-                <div className="rating">
-                  {mapStars(itemRating(item.avgRating))}
-                </div>
-              
-                <label>
-                  {item.name}
-                  <img src="../assets/poke_dollar.svg" alt="pokedollar sign" /> {item.price}
-                </label>
-                <div className="description">{item.description}</div>
-                <div className="button_wrapper comment">
-                  <Link to={`/pokecomment/${id}`}>
-                    <button>
-                      <img src="../assets/speech_bubble.svg" alt="speech bubble" /> Comment
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              <form className={`buy_wrapper ${itemInBasket && 'accepted'}`} onSubmit={addToBasket}>
-                {item.stock ?
-                  <p className={item.stock <= 2 && 'red_text'}> {item.stock <= 2 && 'only '}{item.stock} left in stock</p>
-                  :
-                  <p className="red_text">sorry, out of stock</p>
-                }
-                <input type="number" defaultValue={itemQty} name="qty" min="1" max={item.stock} onChange={(e)=>setItemQty(e.target.value)}/>
+<>
+  <div className="product_wrapper">
+    <img className= "product_image" src={item.image} alt={item.name} />
+    <div className="product_info">
+      <div className="rating">
+        {mapStars(itemRating(item.avgRating))}
+      </div>
+    
+      <label>
+        {item.name}
+        <img src="../assets/poke_dollar.svg" alt="pokedollar sign" /> {item.price}
+      </label>
+      <div className="description">{item.description}</div>
+      <div className="button_wrapper comment">
+        <Link to={`/pokecomment/${id}`}>
+          <button>
+            <img src="../assets/speech_bubble.svg" alt="speech bubble" /> Comment
+          </button>
+        </Link>
+      </div>
+    </div>
+    <form className={`buy_wrapper ${itemInBasket && 'accepted'}`} onSubmit={addToBasket}>
+      {item.stock ?
+        <p className={item.stock <= 2 && 'red_text'}> {item.stock <= 2 && 'only '}{item.stock} left in stock</p>
+        :
+        <p className="red_text">sorry, out of stock</p>
+      }
+      <input type="number" defaultValue={itemQty} name="qty" min="1" max={item.stock} onChange={(e)=>setItemQty(e.target.value)}/>
 
-                { itemInBasket ? <p className="blue">Item added in basket!!</p> : null }
-                { notLoggedIn ? <p className="blue">! Login to add to basket</p> : null}
-                <div className="button_wrapper">
-                  <button>
-                    <img src="../assets/pokeball_orange.svg" alt="pokeball" /> Add to basket
-                  </button>
-                </div>  
+      { itemInBasket ? <p className="blue">Item added in basket!!</p> : null }
+      { notLoggedIn ? <p className="blue">! Login to add to basket</p> : null}
+      <div className="button_wrapper">
+        <button>
+          <img src="../assets/pokeball_orange.svg" alt="pokeball" /> Add to basket
+        </button>
+      </div>  
 
-              </form> 
-              { itemAlreadyInBasket ? 
-                <div>
-                  <p>! Item already in basket</p> 
-                  <button onClick={()=>setItemAlreadyInBasket(false)}>Ok</button>   {/* need styling here */}
-                </div>
-                : null }
-            </div>
+    </form> 
+    { itemAlreadyInBasket ? 
+      <div>
+        <p>! Item already in basket</p> 
+        <button onClick={()=>setItemAlreadyInBasket(false)}>Ok</button>   {/* need styling here */}
+      </div>
+      : null }
+  </div>
+</>
 ```
 
 And in the end this ended up looking similar to this:
@@ -230,64 +229,66 @@ This page was among the most worked pages on the site because it had to display 
 The home page jsx would look something like this
 
 ```js
-<div className="home_hero_wrapper">
-            <div className="left_arrow"  onClick={prevHero}>
-              <img className="left" src={leftArrow} alt="left arrow" />
-            </div>  
-            <div className="inner_wrapper">
-              <div className="hero" style = {{ left: `${heroPos}%` }}>
-                <img
-                  src="../assets/pokezon.png" 
-                  alt="pokezon hero image"
-                />  
-              </div>
-              <div className="hero" style = {{ left: `${heroPos}%` }}>
-                <img
-                  src="../assets/catch.png" 
-                  alt="Catch pokemon with Master ball"
-                />  
-              </div>
-              <div className="hero" style = {{ left: `${heroPos}%` }}>
-                <img
-                  src="../assets/prime.png" 
-                  alt="Pokezon prime coming soon"
-                />  
-              </div>
-              <div className="hero" style = {{ left: `${heroPos}%` }}>
-                <img
-                  src="../assets/battle.png" 
-                  alt="Trainers get your items here"
-                />  
-              </div>
-              <div className="hero" style = {{ left: `${heroPos}%` }}>
-                <img
-                  src="../assets/podcast.png" 
-                  alt="Pokezon podcast coming soon"
-                />  
-              </div>
-            </div>
-            <div className="right_arrow" onClick={nextHero}>
-              <img className="right" src={rightArrow} alt="right arrow" />
-            </div> 
-          </div>
-          <div className="home_content_wrapper float_up_no_margin">
-            <div className="home_section grey_background quarter">
-              <label>Random Pick</label>
-              {mapSmallBoxes(randomItems)}
-            </div>  
-            <div className="home_section single default_box_style quarter">
-              <label>Catch &apos;em all!</label>
-              {mapOneItem(randomPokeball)}
-            </div>  
-            <div className="home_section single default_box_style quarter">
-              <label>Berries!!</label>
-              {mapOneItem(randomBerry)}
-            </div>  
-            <div className="home_section single default_box_style quarter">
-              <label className="cheap_item">Under <img src={pokeDollarOrange} alt="pokedollar sign" />200</label>
-              {mapOneItem(randomCheapItem)}
-            </div>  
-          </div> 
+<>
+  <div className="home_hero_wrapper">
+    <div className="left_arrow"  onClick={prevHero}>
+      <img className="left" src={leftArrow} alt="left arrow" />
+    </div>  
+    <div className="inner_wrapper">
+      <div className="hero" style = {{ left: `${heroPos}%` }}>
+        <img
+          src="../assets/pokezon.png" 
+          alt="pokezon hero image"
+        />  
+      </div>
+      <div className="hero" style = {{ left: `${heroPos}%` }}>
+        <img
+          src="../assets/catch.png" 
+          alt="Catch pokemon with Master ball"
+        />  
+      </div>
+      <div className="hero" style = {{ left: `${heroPos}%` }}>
+        <img
+          src="../assets/prime.png" 
+          alt="Pokezon prime coming soon"
+        />  
+      </div>
+      <div className="hero" style = {{ left: `${heroPos}%` }}>
+        <img
+          src="../assets/battle.png" 
+          alt="Trainers get your items here"
+        />  
+      </div>
+      <div className="hero" style = {{ left: `${heroPos}%` }}>
+        <img
+          src="../assets/podcast.png" 
+          alt="Pokezon podcast coming soon"
+        />  
+      </div>
+    </div>
+    <div className="right_arrow" onClick={nextHero}>
+      <img className="right" src={rightArrow} alt="right arrow" />
+    </div> 
+  </div>
+  <div className="home_content_wrapper float_up_no_margin">
+    <div className="home_section grey_background quarter">
+      <label>Random Pick</label>
+      {mapSmallBoxes(randomItems)}
+    </div>  
+    <div className="home_section single default_box_style quarter">
+      <label>Catch &apos;em all!</label>
+      {mapOneItem(randomPokeball)}
+    </div>  
+    <div className="home_section single default_box_style quarter">
+      <label>Berries!!</label>
+      {mapOneItem(randomBerry)}
+    </div>  
+    <div className="home_section single default_box_style quarter">
+      <label className="cheap_item">Under <img src={pokeDollarOrange} alt="pokedollar sign" />200</label>
+      {mapOneItem(randomCheapItem)}
+    </div>  
+  </div> 
+</>
 ```
 
 For this page, the idea was to show 4 different divs filled with items based on different categories, one of them would have randomly selected items, another would display a random pokeball, another a random berrie and the last one would display a random item below a certain amount. This page was heavily worked and updated by Masa in order to make everything work correctly, and to display the carousel banner to show incoming features or selected banners.
