@@ -489,5 +489,5 @@ Since this was my first time working on a full-stack app the beggining was very 
 
 All the process that took part in this project was very unique and special, we were very ambitious with the amount of functionality we wanted for the website but at the same time everyone was working very hard to achieve everything that we set up to do, due to the amount of work some of the features weren't completely polished and had to be left out of the deployed website but I feel like my teammates and I are very happy about the outcome of this project and I'm certainly very grateful of being part of it, it was a tiring but very enjoyable experience.
 
-
-[Index](#index)
+<!-- 
+[Index](#index) -->
