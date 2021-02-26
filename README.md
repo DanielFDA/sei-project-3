@@ -95,7 +95,7 @@ Now going into the coding phase we had to set up the backend first in order to d
 
 After that we had to work on the API that we were going to use to create the database, but lots of the data had to be edited so we basically had to do it from scratch grabbing the information in pieces. Most of this work was done by my teammate Masa and it's perfectly detailed in his [readme](https://github.com/masarabbit/sei_project_3/blob/main/README.md) for this project.
 
-The objects used for the database would go on to look like this:
+The objects used for the database would go on to look like this.
 
 ```js
 export default [
@@ -128,7 +128,7 @@ export default [
 
 Most of my time coding on this project was focused on the logic for the pokePayment page and the base jsx for multiple pages like the home page, the index page and show page, checkout, confirmation (not deployed to the site) and the payment page itself. This was the basic formatting for how every page would look which would then be changed and styled as we needed.
 
-This is how the JSX for the index page looked :
+This is how the JSX for the index page looked.
 
 ```js
 <>
@@ -167,7 +167,7 @@ And after all the styling and everything being set up correctly, it would look l
 
 This page would display the items with their name, price and star rating based on the search criteria 
 
-For the show page some of the jsx looked like this:
+For the show page some of the jsx looked like this.
 
 ```js
 <>
@@ -218,7 +218,7 @@ For the show page some of the jsx looked like this:
 </>
 ```
 
-And in the end this ended up looking similar to this:
+And in the end this ended up looking similar to this.
 
 <p align="center" width="100%">
     <img width="95%" src="client/src/assets/show-page.png"> 
@@ -226,7 +226,7 @@ And in the end this ended up looking similar to this:
 
 This page was among the most worked pages on the site because it had to display multiple things and needed error handling and bug fixing for most of the features. This page had to show the item with its price and description, had to have the option to create a comment and the all the comments made on the item should be shown, with the option to delete the comment, the user would only be able to delete a comment if they are the user who created them and if they tried to delete a comment from another user the input would be ignored. Theres also a carrousel on this page that will show similar items based on the category of the item being shown.
 
-The home page jsx would look something like this
+The home page jsx would look something like this.
 
 ```js
 <>
@@ -293,7 +293,7 @@ The home page jsx would look something like this
 
 For this page, the idea was to show 4 different divs filled with items based on different categories, one of them would have randomly selected items, another would display a random pokeball, another a random berrie and the last one would display a random item below a certain amount. This page was heavily worked and updated by Masa in order to make everything work correctly, and to display the carousel banner to show incoming features or selected banners.
 
-It would then look like this
+It would then look like this.
 
 <p align="center" width="100%">
     <img width="95%" src="client/src/assets/home-page.png"> 
@@ -304,13 +304,13 @@ It would then look like this
 
 Some of the code that I did for this app revolved around the payment page which I will explain next.
 
-First ill show how the form will look like in the end 
+First ill show how the form will look like in the end. 
 
 <p align="center" width="100%">
     <img width="95%" src="client/src/assets/payment-form.png"> 
 </p>
 
-For this page the first thing that we needed was to get the logged in user data that we were going to later work with
+For this page the first thing that we needed was to get the logged in user data that we were going to later work with.
 
 ```js
   React.useEffect(() => {
@@ -328,7 +328,7 @@ For this page the first thing that we needed was to get the logged in user data 
 
 ```
 
-Then we needed a different state for each one of the form inputs to be able to make the customized error handling and create a formdata state that will store the values that are written into the form to save them and use them in other pages (if we had real transactions some of these values would be encrypted before being stored):
+Then we needed a different state for each one of the form inputs to be able to make the customized error handling and create a formdata state that will store the values that are written into the form to save them and use them in other pages (if we had real transactions some of these values would be encrypted before being stored).
 
 ```js
   const [cardValid, setCardValid] = React.useState('')
@@ -349,7 +349,7 @@ Then we needed a different state for each one of the form inputs to be able to m
   })
 ```
 
-After that we created a regex to evaluate each one of the fields (will explain the functionality each regex)
+After that we created a regex to evaluate each one of the fields (will explain the functionality each regex).
 
 ```js
   const simpleRegex = new RegExp(/^\b(?!.*?\s{2})[A-Za-z ]{1,50}\b$/)
@@ -369,7 +369,7 @@ The code regex was to make sure the security code or CVV had to be made out of 3
 
 The postcode regex simplified was the second version of this regex, the first one evaluated to only accept valid UK postcodes but then we changed it so it was more permisive with other formats, what is does in this version is make sure the first part of the post code consists of at least 2 characters (either numbers or letters) and followed by a minimum of other 2 characters, up until 10 in both cases, you can have dashes or spaces in between both parts of the postcode.
 
-Now to use these regexes I made two functions. The first one 
+Now to use these regexes I made two functions. This is the first one.
 
 ```js
   function setStates(nombre, bool) {
@@ -399,9 +399,9 @@ Now to use these regexes I made two functions. The first one
   }
 ```
 
-was designed to take two props, a name and a boolean. It was tasked with grabbing whatever was passed as nombre (name) and checking which case it matched in order to change the correct state.
+It was designed to take two props, a name and a boolean. It was tasked with grabbing whatever was passed as nombre (name) and checking which case it matched in order to change the correct state.
 
-It worked in conjunction with this other function 
+It worked in conjunction with this other function.
 
 ```js
   const handleValidation = (event) => {
@@ -454,19 +454,19 @@ It worked in conjunction with this other function
 
 What this function did was use the event to locate what field was being inputted and assign the right regex for it, it will then run the test to see if the field in line and if it was it would set the inputted values to the formstate in order to store them and update the correct state using the setStates function and passing it the name with the true' boolean. In case it didn't pass the regex test it would just update the setStates function to set the right state to false'. The conditional flow was made for specific cases where if the user wrote something and then erased it the error would persist on the screen until he fixed it, I didn't want this to happen unless the user inputted a wrong value so had to make this.
 
-This is how the form would look if there's any errors while inputting the data
+This is how the form would look if there's any errors while inputting the data.
 
 <p align="center" width="100%">
     <img width="95%" src="client/src/assets/payment-form-errors.png"> 
 </p>
 
-All the errors would be evaluated as the user inputted them in order to show everything smoothly and to avoid the user submitting the form without having valid values
+All the errors would be evaluated as the user inputted them in order to show everything smoothly and to avoid the user submitting the form without having valid values.
 
 ### Thoughts
 
 This was a really huge and complicated project, but that only made it so we all learned tons, because at this point of the course we were all pretty comfortable researching and learning as we went so we could implement what we wanted for all the features, even with this we couldn't finish all the features that we set out to do because of not having enough time, so we had to keep some of them hidden from the deployed site.
 
-I think everyone on team agrees that this project was a huge win and learning for us, and the fact that it ran smoothly and with very few bugs/core features missing was terrific for me
+I think everyone on team agrees that this project was a huge win and learning for us, and the fact that it ran smoothly and with very few bugs/core features missing was terrific for me.
 
 Have to say that I enjoyed a lot working with both Masa and Christian on this project they both had a lot of insight and inspired me to work harder and better in order to make this site the best we could.
 
