@@ -1,5 +1,7 @@
 # sei project 3 - Pokézon
 
+You can check out the site [here](https://danielfda.github.io/sei-project-3/)
+
 ## Index
 * [Overview](#overview)
 * [Installation](#installation)
